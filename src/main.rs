@@ -62,6 +62,7 @@ enum Set {
     /// Prepare data for Europe (Requires ~43 GiB disk space)
     Europe,
     NorthAmerica,
+    Fixes,
     /// Prepare data for the World (Requires ~400 GiB disk space)
     World,
 }
@@ -86,6 +87,11 @@ impl Set {
             Self::NorthAmerica => {
                 matches!(coordinate.lat, Lat::North(ref y) if (3..=75).contains(y))
                     && matches!(coordinate.lon, Lon::West(ref x) if (51..=175).contains(x))
+            }
+            Self::Fixes => {
+                matches!(coordinate.lat, Lat::North(ref y) if (8).contains(y))
+                && matches!(coordinate.lon, Lon::East(ref x) if (130).contains(x))
+
             }
             Self::World => true,
         }
